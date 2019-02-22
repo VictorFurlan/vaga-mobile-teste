@@ -3,6 +3,7 @@ package com.example.krampus.listapokemon.view;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,6 +22,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class DetalhesActivity extends AppCompatActivity {
 
     int idPokemon = 0;
+    private Toolbar toolbar;
     private Retrofit retrofit;
     private ImageView imageView;
     private ImageView imageViewShiny;
@@ -46,6 +48,7 @@ public class DetalhesActivity extends AppCompatActivity {
         String URL = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" +  idPokemon + ".png";
         String URL_SHINY = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/"+ idPokemon +".png";
 
+        toolbar = (Toolbar) findViewById(R.id.toolbar_detail);
         imageView = (ImageView) findViewById(R.id.iv_image);
         imageViewShiny = (ImageView) findViewById(R.id.fotoImageViewShiny);
         tvName = (TextView) findViewById(R.id.tv_detail_name);
@@ -56,6 +59,10 @@ public class DetalhesActivity extends AppCompatActivity {
         tvSpeed = (TextView) findViewById(R.id.speedTextView);
         tvSpAttack = (TextView) findViewById(R.id.spAttackTextView);
         tvSpDefense= (TextView) findViewById(R.id.spDefenseTextView);
+
+        toolbar.setNavigationIcon(R.drawable.ic_action_arrow_left);
+        toolbar.setTitle("Details");
+        setSupportActionBar(toolbar);
 
         retrofit = new Retrofit.Builder()
                 .baseUrl("http://pokeapi.co/api/v2/")
@@ -105,7 +112,6 @@ public class DetalhesActivity extends AppCompatActivity {
                     tvSpeed.setText(pokemon.pokeStatsToString("speed"));
                     tvSpAttack.setText(pokemon.pokeStatsToString("special-attack"));
                     tvSpDefense.setText(pokemon.pokeStatsToString("special-defense"));
-
                 }else{
                     Log.e("POKEDEX", " on response "+ response.errorBody());
                 }

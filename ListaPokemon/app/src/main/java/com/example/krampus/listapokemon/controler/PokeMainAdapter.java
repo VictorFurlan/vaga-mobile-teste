@@ -18,6 +18,8 @@ import com.example.krampus.listapokemon.model.Pokemon;
 import com.example.krampus.listapokemon.view.DetalhesActivity;
 
 import java.util.ArrayList;
+import java.util.Locale;
+
 
 public class PokeMainAdapter extends RecyclerView.Adapter<PokeMainAdapter.ViewHolder> {
     private ArrayList<Pokemon> dataset;
@@ -69,7 +71,6 @@ public class PokeMainAdapter extends RecyclerView.Adapter<PokeMainAdapter.ViewHo
             fotoImageView = (ImageView) itemView.findViewById(R.id.fotoImageView);
             nomeTextView = (TextView) itemView.findViewById(R.id.nomeTextView);
             cardItemPokemon = (CardView) itemView.findViewById(R.id.item_pokemon);
-
             cardItemPokemon.setOnClickListener(this);
         }
 
@@ -92,3 +93,4 @@ public class PokeMainAdapter extends RecyclerView.Adapter<PokeMainAdapter.ViewHo
         }
     }
 }
+

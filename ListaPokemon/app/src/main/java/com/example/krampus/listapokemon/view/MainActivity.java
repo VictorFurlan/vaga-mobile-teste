@@ -4,10 +4,13 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 
 import com.example.krampus.listapokemon.R;
 import com.example.krampus.listapokemon.controler.PokeMainAdapter;
@@ -99,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
                     PokeGetLista pokemonResposta = response.body();
                     ArrayList<Pokemon> listaPokemon = pokemonResposta.getResults();
                     listaPokemonAdapter.adicionarListaPokemon(listaPokemon);
+
                 } else
                     Log.e(TAG, " on response "+ response.errorBody());
             }
@@ -111,11 +115,15 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu){
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_main, menu);
+    public boolean onOptionsItemSelected(MenuItem item){
 
-        return true;
+        switch (item.getItemId()){
+
+            case R.id.action_exit:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
